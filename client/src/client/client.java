@@ -1,11 +1,9 @@
 package client;
 
-import java.awt.event.KeyEvent;
-import java.net.*;
-import java.io.*;
-import java.util.*;
 import Controllers.*;
 import Database.*;
+
+import java.awt.event.KeyEvent;
 
 public class client extends javax.swing.JFrame {
 
@@ -17,7 +15,7 @@ public class client extends javax.swing.JFrame {
     Socket sock;
     BufferedReader reader;
     PrintWriter writer;
-    
+
     public client() {
         initComponents();
         this.setVisible(true);
@@ -49,7 +47,7 @@ public class client extends javax.swing.JFrame {
 
     //--------------------------//
     public void sendDisconnect() {
-        String bye = (LoginController.user  + ": :Disconnect");
+        String bye = (LoginController.user + ": :Disconnect");
         try {
             writer.println(bye);
             writer.flush();
@@ -238,7 +236,7 @@ public class client extends javax.swing.JFrame {
     private void b_connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_connectActionPerformed
         String n = LoginController.user.toUpperCase();
         jLabel1.setText(n);
-        
+
         if (isConnected == false) {
             try {
                 sock = new Socket(address, port);
@@ -304,7 +302,7 @@ public class client extends javax.swing.JFrame {
                 tf_chat.requestFocus();
             } else {
                 try {
-                    writer.println(LoginController.user  + ":" + tf_chat.getText() + ":" + "Chat");
+                    writer.println(LoginController.user + ":" + tf_chat.getText() + ":" + "Chat");
                     writer.flush(); // flushes the buffer
                 } catch (Exception ex) {
                     ta_chat.append("Message was not sent. \n");

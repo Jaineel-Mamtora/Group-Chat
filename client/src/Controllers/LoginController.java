@@ -6,7 +6,6 @@ import client.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,9 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javafx.application.Platform;
 
-public class LoginController  {
+public class LoginController {
 
     @FXML
     private GridPane root;
@@ -39,14 +37,14 @@ public class LoginController  {
 
     @FXML
     private Label status;
-    
+
     public static String user;
 
     @FXML
     public void onLogin(javafx.event.ActionEvent event) throws SQLException {
-        
+
         user = username.getText();
-        
+
         String query = "SELECT * FROM `database2` WHERE `username` = '%s' && `password` = '%s'";
         query = String.format(query,
                 username.getText(),
@@ -60,7 +58,7 @@ public class LoginController  {
                     //status.setText("Logged in Successfully.");
                     login.getScene().getWindow().hide();
                     new client();
-                    
+
                 } else {
                     status.setText("Incorrect username or password");
                 }
@@ -68,7 +66,7 @@ public class LoginController  {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
         }
     }
 

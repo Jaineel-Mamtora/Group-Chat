@@ -16,7 +16,7 @@ public class DBConnect {
         statement = connection.createStatement();
     }
 
-    public static Statement getStatement(){
+    public static Statement getStatement() {
         return statement;
     }
 

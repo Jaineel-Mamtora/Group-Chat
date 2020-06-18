@@ -14,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,38 +41,35 @@ public class RegisterController {
 
     @FXML
     private Label regstatus;
-    
+
     @FXML
     void newRegister(ActionEvent event) {
-        if(regusername.getText().isEmpty() || regpassword.getText().isEmpty() || regconpassword.getText().isEmpty()){
+        if (regusername.getText().isEmpty() || regpassword.getText().isEmpty() || regconpassword.getText().isEmpty()) {
             regstatus.setText("Please fill all the details.");
-        }
-        else if(!regconpassword.getText().equals(regpassword.getText())){
+        } else if (!regconpassword.getText().equals(regpassword.getText())) {
             regstatus.setText("Password not matching.");
-        }
-        else if(doesUserExist(regusername.getText())){
+        } else if (doesUserExist(regusername.getText())) {
             regstatus.setText("User already exists.");
-        }
-        else{
+        } else {
             String query = "INSERT INTO `database2` (`username`, `password`) VALUES ('%s', '%s')";
             query = String.format(query, regusername.getText(), regpassword.getText());
-            try{
+            try {
 
                 DBConnect.getStatement().executeUpdate(query);
                 regstatus.setText("User Registered");
-            }catch(SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    boolean doesUserExist(String username){
+    boolean doesUserExist(String username) {
         boolean exist = false;
         String query = "SELECT * FROM `database2` WHERE `username` = '%s'";
-        try{
+        try {
             ResultSet set = DBConnect.getStatement().executeQuery(String.format(query, username)); //press control + Q on "Execute Query"
             exist = set.next();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return exist;
